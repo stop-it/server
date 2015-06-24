@@ -85,17 +85,37 @@ class UrlTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
+	 * @covers StopIt\Model\Url::setUpdated
+	 */
+	public function testSetUpdated()
+	{
+		$this->assertEquals('2015-06-24T23:57:00+0200', $this->emptyUrl->setUpdated('2015-06-24T23:57:00+0200')->getUpdated());
+		$this->assertNull($this->emptyUrl->setUpdated(null)->getUpdated());
+	}
+
+	/**
 	 * @covers StopIt\Model\Url::exchangeArray
 	 */
 	public function testExchangeArray()
 	{
-		$this->markTestIncomplete('Finish "exchangeArray" test!');
+		$this->emptyUrl->exchangeArray(array(
+			'Id' => 2,
+			'Url' => 'http://test.url',
+			'Updated' => '2015-06-25T00:07:00+0200',
+		));
+		$this->assertEquals(2, $this->emptyUrl->getId());
+		$this->assertEquals('http://test.url', $this->emptyUrl->getUrl());
+		$this->assertEquals('2015-06-25T00:07:00+0200', $this->emptyUrl->getUpdated());
 	}
+
 	/**
 	 * @covers StopIt\Model\Url::toArray
 	 */
 	public function testToArray()
 	{
-		$this->markTestIncomplete('Finish "toArray" test!');
+		$urlData = $this->sampleUrl->toArray();
+		$this->assertEquals(1, $urlData['Id']);
+		$this->assertEquals('http://www.test.url', $urlData['Url']);
+		$this->assertEquals('2015-06-24T23:34:00+0200', $urlData['Updated']);
 	}
 }

@@ -128,9 +128,9 @@ class Url
 	public function toArray()
 	{
 		return array(
-			'Id' => $id,
-			'Url' => $url,
-			'Updated' => $updated,
+			'Id' => $this->id,
+			'Url' => $this->url,
+			'Updated' => $this->updated,
 		);
 	}
 }
