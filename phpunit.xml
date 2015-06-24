@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ - Simple JSON-RPC server for odTimeTracker front-end applications.
+ -
+ - @copyright (c) 2015 Leonardo Sedevcic
+ - @author Ondřej Doněk, <ondrejd@gmail.com>
+ - @license https://www.mozilla.org/MPL/2.0/ Mozilla Public License 2.0
+ -->
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/4.5/phpunit.xsd"
+         bootstrap="./test/bootstrap.php"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         verbose="false"
+         stopOnFailure="false"
+         processIsolation="false"
+         backupGlobals="true"
+         syntaxCheck="true"
+         colors="true">
+	<testsuites>
+		<testsuite>
+			<directory>./test/src</directory>
+		</testsuite>
+	</testsuites>
+	<filter>
+		<whitelist>
+			<directory suffix=".php">./src</directory>
+			<exclude>
+				<file>./index.php</file>
+				<directory>./vendor</directory>
+			</exclude>
+		</whitelist>
+	</filter>
+</phpunit>

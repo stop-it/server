@@ -1,0 +1,38 @@
+{
+	"name": "stop-it.be/server",
+	"description": "Server part of Stop-it application.",
+	"type": "application",
+	"license": "Mozilla Public License 2.0",
+	"authors": [
+		{
+			"name": "Leonardo Sedevcic",
+			"email": "stop-it.be@hotmail.com",
+			"homepage": "http://stop-it.be/",
+			"role": "Manager"
+		},
+		{
+			"name": "Ondřej Doněk",
+			"email": "ondrejd@gmail.com",
+			"homepage": "https://ondrejdonek.blogspot.com/",
+			"role": "Developer"
+		}
+	],
+	"support": {
+		"email": "stop-it.be@hotmail.com",
+		"issues": "https://github.com/stop-it/server/issues",
+		"source": "https://github.com/stop-it/server"
+	},
+	"minimum-stability": "stable",
+	"autoload": {
+		"psr-0": {
+			"odTimeTracker\\JsonRpc\\": "src/"
+		},
+		"classmap": [
+			"./"
+		]
+	},
+	"require": {
+		"php": ">=5.5",
+		"slim/slim": "^2.6"
+	}
+}
