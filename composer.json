@@ -2,7 +2,7 @@
 	"name": "stop-it.be/server",
 	"description": "Server part of Stop-it application.",
 	"type": "application",
-	"license": "Mozilla Public License 2.0",
+	"license": "MPL-2.0",
 	"authors": [
 		{
 			"name": "Leonardo Sedevcic",
@@ -25,7 +25,7 @@
 	"minimum-stability": "stable",
 	"autoload": {
 		"psr-0": {
-			"odTimeTracker\\JsonRpc\\": "src/"
+			"StopIt\\": "src/"
 		},
 		"classmap": [
 			"./"
