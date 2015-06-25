@@ -46,4 +46,20 @@ class SqliteTest extends \PHPUnit_Framework_TestCase
 	{
 		$this->markTestIncomplete('Finish `emptyStorage` test!');
 	}
+
+	/**
+	 * @covers StopIt\Storage\Sqlite::checkIfUrlExists
+	 */
+	public function testCheckIfUrlExists()
+	{
+		$this->markTestIncomplete('Finish `checkIfUrlExists` test`');
+	}
+
+	/**
+	 * @covers StopIt\Storage\Sqlite::insertUrl
+	 */
+	public function testInsertUrl()
+	{
+		$this->markTestIncomplete('Finish `insertUrl` test`');
+	}
 }

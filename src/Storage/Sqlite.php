@@ -74,4 +74,44 @@ VACUUM;
 EOT;
 		$this->pdo->exec($sql);
 	}
+
+	/**
+	 * Check if URL exists in our database.
+	 * @param string $url
+	 * @return boolean
+	 */
+	public function checkIfUrlExists($url)
+	{
+		$sql = 'SELECT Id FROM Urls WHERE Url LIKE "%'. $url . '%"';
+		$stmt = $this->pdo->query($sql);
+		$res = $stmt->fetchAll();
+
+		return (count($res) > 0);
+	}
+
+	/**
+	 * Insert new URL into the database.
+	 * @param string $url
+	 * @return Url|boolean Returns `FALSE` when inserting failed.
+	 */
+	public function insertUrl($url)
+	{
+		$sql = 'INSERT INTO Urls (Url, Updated) VALUES (?, ?)';
+		$stmt = $this->pdo->prepare($sql);
+
+		$updated = date(self::RFC3339);
+		$res = $stmt->execute(array($url, $updated));
+
+		if ($res === false) {
+			return false;
+		}
+
+		$url = new Url(
+			$this->pdo->lastInsertId(),
+			$url,
+			$updated
+		);
+
+		return $url;
+	}
 }
