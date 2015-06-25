@@ -9,6 +9,8 @@
 
 namespace StopIt\Storage;
 
+use StopIt\Model\Url;
+
 /**
  * Simple interface defining storage.
  *
@@ -31,4 +33,18 @@ interface StorageInterface
 	 * Clear all data from the storage.
 	 */
 	public function emptyStorage();
+
+	/**
+	 * Check if URL exists in our database.
+	 * @param string $url
+	 * @return boolean
+	 */
+	public function checkIfUrlExists($url);
+
+	/**
+	 * Insert new URL into the database.
+	 * @param string $url
+	 * @return Url|boolean Returns `FALSE` when inserting failed.
+	 */
+	public function insertUrl($url);
 }
