@@ -36,15 +36,30 @@ interface StorageInterface
 
 	/**
 	 * Check if URL exists in our database.
-	 * @param string $url
+	 * @param string|Url $url
 	 * @return boolean
 	 */
 	public function checkIfUrlExists($url);
 
 	/**
 	 * Insert new URL into the database.
-	 * @param string $url
+	 * @param string|Url $url
 	 * @return Url|boolean Returns `FALSE` when inserting failed.
 	 */
 	public function insertUrl($url);
+
+	/**
+	 * Remove URL from the database.
+	 * @param integer|Url|string $url
+	 * @return boolean Returns `FALSE` when removing failed.
+	 */
+	public function removeUrl($url);
+
+	/**
+	 * Select URL(s). Parameter `$where` should be valid WHERE part of SQL query.
+	 * @param string $where
+	 * @return array|boolean Returns `FALSE` when selecting failed. Otherwise 
+	 *                       returns array of instances of {@see Url} object.
+	 */
+	public function selectUrl($where);
 }

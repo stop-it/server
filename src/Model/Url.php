@@ -18,19 +18,19 @@ class Url
 {
 	/**
 	 * Numeric identifier of the blocked URL.
-	 * @var integer $Id
+	 * @var integer $id
 	 */
 	protected $id;
 	
 	/**
 	 * Blocked URL self.
-	 * @var string $Url
+	 * @var string $url
 	 */
 	protected $url;
 
 	/**
 	 * Date time when was URL updated.
-	 * @var string $Updated
+	 * @var string $updated
 	 */
 	protected $updated;
 
@@ -46,6 +46,20 @@ class Url
 		$this->url = $url;
 		$this->updated = $updated;
 	}
+
+	/**
+	 * Helper setter method - used because of getting `\PDO::FETCH_CLASS` working.
+	 * @param string $name
+	 * @param string $value
+	 */
+	public function __set($name, $value)
+	{
+		$property = lcfirst($name);
+
+		if (property_exists($this, $property)) {
+			$this->{$property} = ($property == 'id') ? (int) $value : $value;
+		}
+	}
 	
 	/**
 	 * Exchange values of the object with given array.
@@ -60,6 +74,7 @@ class Url
 				$this->{$lkey} = $val;
 			}
 		}
+
 		return $this;
 	}
 

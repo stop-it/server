@@ -63,6 +63,7 @@ PRAGMA user_version = 1;
 EOT;
 		$this->pdo->exec($sql);
 	}
+
 	/**
 	 * Clear all data from the storage.
 	 */
@@ -77,11 +78,15 @@ EOT;
 
 	/**
 	 * Check if URL exists in our database.
-	 * @param string $url
+	 * @param string|Url $url
 	 * @return boolean
 	 */
 	public function checkIfUrlExists($url)
 	{
+		if (($url instanceof Url)) {
+			$url = $url->getUrl();
+		}
+
 		$sql = 'SELECT Id FROM Urls WHERE Url LIKE "%'. $url . '%"';
 		$stmt = $this->pdo->query($sql);
 		$res = $stmt->fetchAll();
@@ -91,11 +96,15 @@ EOT;
 
 	/**
 	 * Insert new URL into the database.
-	 * @param string $url
+	 * @param string|Url $url
 	 * @return Url|boolean Returns `FALSE` when inserting failed.
 	 */
 	public function insertUrl($url)
 	{
+		if (($url instanceof Url)) {
+			$url = $url->getUrl();
+		}
+
 		$sql = 'INSERT INTO Urls (Url, Updated) VALUES (?, ?)';
 		$stmt = $this->pdo->prepare($sql);
 
@@ -113,5 +122,43 @@ EOT;
 		);
 
 		return $url;
+	}
+
+	/**
+	 * Remove URL from the database.
+	 * @param integer|Url|string $url
+	 * @return boolean Returns `FALSE` when removing failed.
+	 */
+	public function removeUrl($url)
+	{
+		if (($url instanceof Url)) {
+			$url = $url->getUrl();
+		}
+
+		$sql = 'DELETE FROM Urls WHERE Url = ? LIMIT 1';
+		$stmt = $this->pdo->prepare($sql);
+
+		return $stmt->execute(array($url));
+	}
+
+	/**
+	 * Select URL(s). Parameter `$where` should be valid WHERE part of SQL query.
+	 * @param string $where
+	 * @return array|boolean Returns `FALSE` when selecting failed. Otherwise 
+	 *                       returns array of instances of {@see Url} object.
+	 */
+	public function selectUrl($where)
+	{
+		$where = (empty($where)) ? '1' : $where;
+		$stmt = $this->pdo->query('SELECT * FROM Urls WHERE ' . $where);
+
+		if ($stmt === false) {
+			return false;
+		}
+
+		$stmt->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, 'StopIt\Model\Url');
+		$res = $stmt->fetchAll();
+
+		return $res;
 	}
 }

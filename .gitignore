@@ -6,4 +6,4 @@ convert_urls_to_sqlite.php
 current_urls_arr.php
 
 # Database with blocked URLs
-db.sqlite
+*.sqlite
